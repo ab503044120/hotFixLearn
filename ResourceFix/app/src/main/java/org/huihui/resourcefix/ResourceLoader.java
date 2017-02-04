@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Build;
+import android.support.v4.util.ArrayMap;
+import android.util.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  * User: Administrator
@@ -32,7 +33,7 @@ public class ResourceLoader {
             int cookie = AndroidHack.AssetManager_addAssetPath.invokeWithParam(patchResource.getAbsolutePath()).on(newAssetManager);
             //添加成功时cookie必然大于0
             if (cookie == 0) {
-                Logger.e(TAG, "Could not create new AssetManager");
+                Log.e(TAG, "Could not create new AssetManager");
                 return false;
             }
             // 在Android 19以前需要调用这个方法，但是Android L后不需要，实际情况Andorid L上调用也不会有问题，因此这里不区分版本
@@ -79,7 +80,7 @@ public class ResourceLoader {
             }
             return true;
         } catch (Throwable throwable) {
-            Logger.e(TAG, throwable);
+            Log.e(TAG, throwable.toString());
             throwable.printStackTrace();
         }
         return false;

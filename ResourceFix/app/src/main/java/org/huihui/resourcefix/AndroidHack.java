@@ -9,7 +9,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  * User: Administrator
@@ -74,7 +73,7 @@ public class AndroidHack {
             return sIsReflectAvailable;
         } catch (Throwable e) {
             sIsReflectAvailable = false;
-            Log.d(TAG, e);
+            Log.d(TAG, e.toString());
         } finally {
             sIsReflectChecked = true;
             long stopHack = System.currentTimeMillis();
@@ -101,7 +100,7 @@ public class AndroidHack {
 
     private static void hackResources() {
         //HackPlus AssetManager
-        AssetManager = HackPlus.into(AssetManager.class);
+        AssetManager = HackPlus.into(android.content.res.AssetManager.class);
         AssetManager_construct = AssetManager.constructor().withoutParams();
         AssetManager_addAssetPath = AssetManager.method("addAssetPath").returning(int.class).withParam(String.class);
         AssetManager_ensureStringBlocks = AssetManager.method("ensureStringBlocks").withoutParams();

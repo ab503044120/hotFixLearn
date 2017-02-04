@@ -770,6 +770,10 @@ public class HackPlus {
         }
 
         private final Class<C> mClass;
+
+        public final Class<C> getClazz() {
+            return  mClass;
+        }
     }
 
     public static <T> HackedClass<T> into(final Class<T> clazz) {
